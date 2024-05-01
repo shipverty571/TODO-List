@@ -47,6 +47,8 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "globals": "^15.1.0",
+    "mobx": "^6.12.3",
+    "mobx-react-lite": "^4.0.7",
     "prettier": "3.2.5"
   }
 }

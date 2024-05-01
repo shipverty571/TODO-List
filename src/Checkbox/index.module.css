@@ -1,0 +1,13 @@
+﻿.Checkbox {
+    background: none;
+    border: none;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+}
+.Checkbox:hover {
+    background: #ebebeb;
+}
+.Checkbox:active {
+    transform: scale(0.9);
+}

@@ -6,7 +6,7 @@ import {removeTodoAction, toggleTodoDoneAction} from "../Stores/TodoReducer";
 const TodoList = memo(() => {
     console.log("Todo list is updated");
     const dispatch = useDispatch();
-    const todos = useSelector((state) => state.items);
+    const todosIds = useSelector((state) => state.itemsIds);
     
     const handleChangeStatus = useCallback((id) => {
         dispatch(toggleTodoDoneAction(id));
@@ -17,11 +17,11 @@ const TodoList = memo(() => {
     }, [dispatch]);
     return (
         <div>
-            {todos.map((item) => (
+            {todosIds.map((id) => (
                 <TodoItem 
-                    key={item.id} 
+                    key={id} 
                     handleChangeStatus={handleChangeStatus} 
-                    item={item} 
+                    itemId={id} 
                     handleRemoveTodo={handleRemoveTodo} />
             ))}
         </div>

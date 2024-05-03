@@ -1,34 +1,37 @@
-import React, {memo} from 'react';
+import React, {memo, useState} from 'react';
 import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 import styles from "./index.module.css"
 import ControlButton from "../ControlButton";
 import Checkbox from "../Checkbox";
 
 /**
  * Компонент элемента списка задач.
- * @param item Объект задачи.
+ * @param itemId ID задачи.
  * @param handleChangeStatus Функция обновления статуса задачи.
  * @param handleRemoveTodo Функция удаления задачи.
  */
-const TodoItem = memo(({ item, handleChangeStatus, handleRemoveTodo }) => {
-    console.log(`Todo item ${item.id} is updated`);
+const TodoItem = memo(({ itemId, handleChangeStatus, handleRemoveTodo }) => {
+    console.log(`Todo item ${itemId} is updated`);
     const handleChangeStatusItem = () => {
-        handleChangeStatus(item.id);
+        handleChangeStatus(itemId);
     }
+    const todos = useSelector((state) => state.items[itemId])
+    /* const [currentItem, ] = useState(todos.find((item) => item.id === itemId)); */
     return (
-        <div className={styles.TodoItem}>
-            <Checkbox onChange={handleChangeStatusItem} isChecked={item.isDone} />
+        <div className={styles.TodoItem} key={itemId}>
+            <Checkbox onChange={handleChangeStatusItem} isChecked={todos.isDone} />
             <p style={{
                 flexGrow: 1,
                 margin: 0,
-                textDecoration: item.isDone ? "line-through" : "none"
-            }}>{item.title}</p>
-            <ControlButton onClick={() => handleRemoveTodo(item.id)} pictureName="remove_96x96_color.png"/>
+                textDecoration: todos.isDone ? "line-through" : "none"
+            }}>{todos.title}</p>
+            <ControlButton onClick={() => handleRemoveTodo(itemId)} pictureName="remove_96x96_color.png"/>
         </div>
     );
 });
 TodoItem.propTypes = {
-    item: PropTypes.instanceOf(Object).isRequired,
+    itemId: PropTypes.number.isRequired,
     handleChangeStatus: PropTypes.func.isRequired,
     handleRemoveTodo: PropTypes.func.isRequired
 }

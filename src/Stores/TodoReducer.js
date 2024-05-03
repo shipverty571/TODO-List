@@ -1,28 +1,8 @@
 import {getId} from "../Services/GetId";
 
 const defaultState = {
-    items: [
-        {
-            id: getId(),
-            title: "Сделать сотку в жиме лежа",
-            isDone: false
-        },
-        {
-            id: getId(),
-            title: "Полить кактусы",
-            isDone: false
-        },
-        {
-            id: getId(),
-            title: "Отправить PR",
-            isDone: true
-        },
-        {
-            id: getId(),
-            title: "Проверить лабораторную работу",
-            isDone: true
-        },
-    ]
+    items: {},
+    itemsIds: []
 }
 
 const ADD_TODO = "ADD_TODO";
@@ -33,29 +13,35 @@ const TODO_DONE = "TODO_DONE"
 export const todosReducer = (state = defaultState, action) => {
     switch (action.type) {
         case ADD_TODO: {
+            const id = getId();
+            const newState = {...state};
+            newState.items[id] = {
+                id,
+                title: action.payload,
+                isDone: false
+            }
             return {
-                ...state, 
-                items: [
-                    ...state.items, 
-                    {
-                        id: getId(),
-                        title: action.payload,
-                        isDone: false
-                    }
-                ]
+                ...newState,
+                itemsIds: [...state.itemsIds, id]
             }
         }
         case REMOVE_TODO: {
-            return {...state, items: state.items.filter((item) => item.id !== action.payload)}
+            const newState = {...state};
+            delete newState[action.payload];
+            return {
+                ...newState, 
+                itemsIds: state.itemsIds.filter((itemId) => itemId !== action.payload)
+            }
         }
         case TODO_DONE: {
-            return {
-                ...state, 
-                items: [
-                    ...state.items.map((item) => item.id === action.payload ?
-                    {...item, isDone: !item.isDone} : item)
-                ]
+            const newState = {...state};
+            newState.items[action.payload] = {
+                ...newState.items[action.payload],
+                isDone: !newState.items[action.payload].isDone
             }
+            return {
+                ...newState
+            };
         }
         default:
             return state;

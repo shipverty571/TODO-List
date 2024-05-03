@@ -1,16 +1,16 @@
-import React, {useState} from 'react';
-import {observer} from "mobx-react-lite";
+import React, {memo, useState} from 'react';
+import {useDispatch} from "react-redux";
 import AddInput from "../AddInput";
 import ControlButton from "../ControlButton";
-import {useStores} from "../Stores/RootStoreContext";
+import {addTodoAction} from "../Stores/TodoReducer";
 
-const AddForm = observer(() => {
-    const { todos } = useStores();
+const AddForm = memo(() => {
+    const dispatch = useDispatch();
     
     const [newTodoTitle, setNewTodoTitle] = useState();
 
     const handleAddTodo = () => {
-        todos.addTodo(newTodoTitle);
+        dispatch(addTodoAction(newTodoTitle));
         setNewTodoTitle("");
     }
     return (

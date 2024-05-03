@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import {Provider} from "react-redux";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {RootStoreContext} from "./Stores/RootStoreContext"
-import RootStore from "./Stores/RootStore";
+import {store} from "./Stores/TodoStore";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <RootStoreContext.Provider value={new RootStore()}>
+    <Provider store={store}>
         <App />
-    </RootStoreContext.Provider>
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

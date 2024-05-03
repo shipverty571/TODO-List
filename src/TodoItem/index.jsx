@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from "prop-types";
-import {observer} from "mobx-react-lite";
 import styles from "./index.module.css"
 import ControlButton from "../ControlButton";
 import Checkbox from "../Checkbox";
@@ -11,7 +10,7 @@ import Checkbox from "../Checkbox";
  * @param handleChangeStatus Функция обновления статуса задачи.
  * @param handleRemoveTodo Функция удаления задачи.
  */
-const TodoItem = observer(({ item, handleChangeStatus, handleRemoveTodo }) => {
+const TodoItem = memo(({ item, handleChangeStatus, handleRemoveTodo }) => {
     console.log(`Todo item ${item.id} is updated`);
     const handleChangeStatusItem = () => {
         handleChangeStatus(item.id);

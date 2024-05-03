@@ -1,22 +1,23 @@
-import React, {useCallback} from 'react';
-import {observer} from "mobx-react-lite";
+import React, {memo, useCallback} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import TodoItem from "../TodoItem";
-import {useStores} from "../Stores/RootStoreContext";
+import {removeTodoAction, toggleTodoDoneAction} from "../Stores/TodoReducer";
 
-const TodoList = observer(() => {
+const TodoList = memo(() => {
     console.log("Todo list is updated");
-    const { todos } = useStores();
+    const dispatch = useDispatch();
+    const todos = useSelector((state) => state.items);
     
     const handleChangeStatus = useCallback((id) => {
-        todos.toggleTodoDone(id);
-    }, [todos]);
+        dispatch(toggleTodoDoneAction(id));
+    }, [dispatch]);
     
     const handleRemoveTodo = useCallback((id) => {
-        todos.removeTodo(id);
-    }, [todos]);
+        dispatch(removeTodoAction(id));
+    }, [dispatch]);
     return (
         <div>
-            {todos.items.map((item) => (
+            {todos.map((item) => (
                 <TodoItem 
                     key={item.id} 
                     handleChangeStatus={handleChangeStatus} 

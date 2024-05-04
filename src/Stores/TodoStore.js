@@ -2,28 +2,7 @@ import {makeAutoObservable} from "mobx";
 import {getId} from "../Services/GetId";
 
 class TodoStore {
-    items = [
-        {
-            id: getId(),
-            title: "Сделать сотку в жиме лежа",
-            isDone: false
-        },
-        {
-            id: getId(),
-            title: "Полить кактусы",
-            isDone: false
-        },
-        {
-            id: getId(),
-            title: "Отправить PR",
-            isDone: true
-        },
-        {
-            id: getId(),
-            title: "Проверить лабораторную работу",
-            isDone: true
-        },
-    ];
+    items = [];
     
     constructor() {
         makeAutoObservable(this);

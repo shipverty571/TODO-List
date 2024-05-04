@@ -22,7 +22,8 @@ const TodoItem = observer(({ item, handleChangeStatus, handleRemoveTodo }) => {
             <p style={{
                 flexGrow: 1,
                 margin: 0,
-                textDecoration: item.isDone ? "line-through" : "none"
+                paddingTop: 5,
+                textDecoration: item.isDone ? "line-through" : "none",
             }}>{item.title}</p>
             <ControlButton onClick={() => handleRemoveTodo(item.id)} pictureName="remove_96x96_color.png"/>
         </div>

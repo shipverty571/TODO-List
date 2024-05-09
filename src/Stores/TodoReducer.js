@@ -1,28 +1,7 @@
 import {getId} from "../Services/GetId";
 
 const defaultState = {
-    items: [
-        {
-            id: getId(),
-            title: "Сделать сотку в жиме лежа",
-            isDone: false
-        },
-        {
-            id: getId(),
-            title: "Полить кактусы",
-            isDone: false
-        },
-        {
-            id: getId(),
-            title: "Отправить PR",
-            isDone: true
-        },
-        {
-            id: getId(),
-            title: "Проверить лабораторную работу",
-            isDone: true
-        },
-    ]
+    items: []
 }
 
 const ADD_TODO = "ADD_TODO";
